@@ -66,8 +66,8 @@ class MyCustomType(type):
 
         console.print(f"[bright_yellow]Calling {cls} with {args} and {kwargs}[/]")
         if cls.__dict__["__doc__"] is not None:
-            console.print(f"[bright_yellow]Good job! You added a doc string.")
-            print(f"{cls.__dict__['__doc__']}[/]\n")
+            console.print(f"[bright_yellow]Good job! You added a doc string:[/]")
+            console.print(f"\n\t[bright_yellow]{cls.__dict__['__doc__']}[/]\n")
         else:
             raise ValueError("You forgot to add a doc string.")
 
@@ -84,7 +84,7 @@ class MyCustomType(type):
 
 
 class Pizzabase(metaclass=MyCustomType):
-    """TEST"""
+    """Pizaabase class using MyCustomType metaclass"""
 
     def __init__(self, radius):
         console.print(
