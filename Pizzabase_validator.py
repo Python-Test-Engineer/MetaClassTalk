@@ -38,11 +38,13 @@ class MyCustomType(type):
 
     def __new__(metacls, class_name, inherited_classes, class_body):
 
-        console.print("[gold1 bold italic]__new__ called...[/]")
+        console.print("[dark_orange bold italic]__new__ called...[/]")
 
-        print(f"Using custom metaclass {metacls} to create class {class_name}...\n")
-        print(
-            f"[gold1]Developer can now run organisation validations here by adding metaclass {metacls} to class {class_name}...[/]\n"
+        console.print(
+            f"[dark_orange]Using custom metaclass {metacls} to create class {class_name}...[/]\n"
+        )
+        console.print(
+            f"[dark_orange]Developer can now run organisation validations here by adding metaclass {metacls} to class {class_name}...[/]\n"
         )
 
         if not class_name.istitle():
@@ -51,7 +53,7 @@ class MyCustomType(type):
 
         else:
 
-            console.print("[gold1]GOOD JOB! Title case used.[/]")
+            console.print("[dark_orange]GOOD JOB! Title case used.[/]")
 
         # print(vars(class_name)) class_name is just a string not the class object
         cls_obj = super().__new__(metacls, class_name, inherited_classes, class_body)
@@ -105,5 +107,5 @@ vars(Pizzabase)
 
 
 p = Pizzabase(random.randint(1, 10))
-console.print(f"\n[orange1]Pizza Circumference {p.circ()}[/]")
-console.print(f"[orange1]Pizza areas {p.area()}[/]\n")
+console.print(f"\n[blue]Pizza Circumference {p.circ()}[/]")
+console.print(f"[blue]Pizza areas {p.area()}[/]\n")
