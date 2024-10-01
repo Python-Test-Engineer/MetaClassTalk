@@ -5,22 +5,8 @@ from rich.console import Console
 console = Console()
 
 
-class Pizzabase(metaclass=type):
-
-    def __init__(self, radius):
-
-        self.radius = radius
-
-    def area(self):
-
-        return round(math.pi * self.radius**2, 2)
-
-
-type(Pizzabase), Pizzabase.__name__
-
-
-p = Pizzabase(10)
-p.area()
+class Parent:
+    console.print("[red]Parent[/]")
 
 
 CUSTOM_COUNTER = 0
@@ -35,32 +21,6 @@ class MyCustomType(type):
         )
 
         return {}
-
-    def __new__(metacls, class_name, inherited_classes, class_body):
-
-        console.print("[dark_orange bold italic]__new__ called...[/]")
-
-        console.print(
-            f"[dark_orange]Using custom metaclass {metacls} to create class {class_name}...[/]\n"
-        )
-        console.print(
-            f"[dark_orange]Developer can now run organisation validations here by adding metaclass {metacls} to class {class_name}...[/]\n"
-        )
-
-        if not class_name.istitle():
-
-            raise ValueError("Class class_name must start with an uppercase letter")
-
-        else:
-
-            console.print("[dark_orange]GOOD JOB! Title case used.[/]")
-
-        # print(vars(class_name)) class_name is just a string not the class object
-        cls_obj = super().__new__(metacls, class_name, inherited_classes, class_body)
-
-        cls_obj.circ = lambda self: round(2 * math.pi * self.radius, 2)
-
-        return cls_obj
 
     def __call__(cls, *args, **kwargs):
         console.print("==========================================================")
@@ -84,8 +44,34 @@ class MyCustomType(type):
 
         return super().__call__(*args, **kwargs)
 
+    def __new__(metacls, class_name, inherited_classes, class_body):
 
-class Pizzabase(metaclass=MyCustomType):
+        console.print("[dark_orange bold italic]__new__ called...[/]")
+
+        console.print(
+            f"[dark_orange]Using custom metaclass {metacls} to create class {class_name}...[/]\n"
+        )
+        console.print(
+            f"[dark_orange]Developer can now run organisation validations here by adding metaclass {metacls} to class {class_name} and inherited classes {inherited_classes}...[/]\n"
+        )
+
+        if not class_name.istitle():
+
+            raise ValueError("Class class_name must start with an uppercase letter")
+
+        else:
+
+            console.print("[dark_orange]GOOD JOB! Title case used.[/]")
+
+        # print(vars(class_name)) class_name is just a string not the class object
+        cls_obj = super().__new__(metacls, class_name, inherited_classes, class_body)
+
+        cls_obj.circ = lambda self: round(2 * math.pi * self.radius, 2)
+
+        return cls_obj
+
+
+class Pizzabase(Parent, metaclass=MyCustomType):
     """Pizaabase class using MyCustomType metaclass"""
 
     def __init__(self, radius):
